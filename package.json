@@ -1,0 +1,55 @@
+{
+	"name": "@afges/n8n-nodes-archivebox",
+	"version": "0.1.0",
+	"description": "A collection of n8n nodes for the ArchiveBox API",
+	"license": "MIT",
+	"homepage": "https://git.afges.eu/n8n/n8n-nodes-archivebox#readme",
+	"bugs": {
+		"url": "https://git.afges.eu/n8n/n8n-nodes-archivebox/issues"
+	},
+	"keywords": [
+		"n8n-community-node-package"
+	],
+	"author": {
+		"name": "Charles LESECQ",
+		"email": "charles.lesecq@afges.org"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AFGES/n8n-nodes-archivebox.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"check": "vp check",
+		"check:fix": "vp check --fix",
+		"format": "vp fmt",
+		"release": "release-it",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/ArchiveBoxApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/ArchiveBox/ArchiveBox.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "^0.55.0",
+		"release-it": "^21.1.2",
+		"typescript": "6.0.3",
+		"vite-plus": "1.5.0"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+	"minimumReleaseAge": "7 days",
+	"lockFileMaintenance": {
+		"enabled": true
+	},
+	"vulnerabilityAlerts": {
+		"enabled": true,
+		"labels": ["security"]
+	},
+	"packageRules": [
+		{
+			"description": "TypeScript 7 breaks n8n-node lint (typescript-eslint); hold until @n8n/node-cli supports it",
+			"matchPackageNames": ["typescript"],
+			"allowedVersions": "<7"
+		}
+	]
+}

@@ -1,0 +1,18 @@
+{
+	"node": "@afges/n8n-nodes-archivebox",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Utility", "Data & Storage"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/AFGES/n8n-nodes-archivebox?tab=readme-ov-file#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/AFGES/n8n-nodes-archivebox?tab=readme-ov-file"
+			}
+		]
+	}
+}
