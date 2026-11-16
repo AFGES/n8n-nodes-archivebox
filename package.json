@@ -1,6 +1,6 @@
 {
 	"name": "@afges/n8n-nodes-archivebox",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "A collection of n8n nodes for the ArchiveBox API",
 	"license": "MIT",
 	"homepage": "https://git.afges.eu/n8n/n8n-nodes-archivebox#readme",
