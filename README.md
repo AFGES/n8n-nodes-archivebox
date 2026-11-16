@@ -51,6 +51,10 @@ Le nœud utilise des identifiants **ArchiveBox API** (clé d'API envoyée dans l
 
 Les identifiants sont validés via un appel à `GET /api/v1/core/tags?limit=1`.
 
+> **Derrière un proxy inverse avec SSO** (Pangolin, Authelia, oauth2-proxy…), laissez passer
+> `/api/*` sans SSO : la clé d'API authentifie l'API. Sinon, le proxy répond par sa page de
+> connexion (HTML) et le nœud échoue avec l'erreur « ArchiveBox returned an HTML page instead of JSON ».
+
 ### Opérations
 
 | Ressource                                 | Opérations                                                                                  | Description                                                                                                                  |
@@ -139,6 +143,10 @@ header).
      is not possible (self-hosted instances).
 
 Credentials are validated with a call to `GET /api/v1/core/tags?limit=1`.
+
+> **Behind an SSO reverse proxy** (Pangolin, Authelia, oauth2-proxy…), let `/api/*` through
+> without SSO: the API key authenticates the API. Otherwise the proxy answers with its login
+> page (HTML) and the node fails with "ArchiveBox returned an HTML page instead of JSON".
 
 ### Operations
 

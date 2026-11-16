@@ -1,10 +1,4 @@
-import type {
-	IAuthenticateGeneric,
-	ICredentialTestRequest,
-	ICredentialType,
-	INodeProperties,
-	Icon,
-} from 'n8n-workflow';
+import type { IAuthenticateGeneric, ICredentialType, INodeProperties, Icon } from 'n8n-workflow';
 
 export class ArchiveBoxApi implements ICredentialType {
 	name = 'archiveBoxApi';
@@ -56,13 +50,6 @@ export class ArchiveBoxApi implements ICredentialType {
 		},
 	};
 
-	test: ICredentialTestRequest = {
-		request: {
-			baseURL: '={{$credentials.baseUrl.replace(/\\/$/, "")}}',
-			url: '/api/v1/core/tags?limit=1',
-			method: 'GET',
-			headers: { Accept: 'application/json' },
-			skipSslCertificateValidation: '={{$credentials.ignoreSslIssues}}',
-		},
-	};
+	// No declarative `test`: n8n would prefer it over the node's `testedBy` and count an SSO login
+	// page (HTML, 200) as a success. Tested by ArchiveBox.node.ts methods.credentialTest instead
 }
