@@ -57,21 +57,21 @@ Les identifiants sont validés via un appel à `GET /api/v1/core/tags?limit=1`.
 
 ### Opérations
 
-| Ressource                                 | Opérations                                                                                  | Description                                                                                                                  |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Résultat d'archivage** (Archive Result) | Get · Get Many                                                                              | Récupère un résultat par ID ; liste (filtres : plugin, statut, snapshot, tag, URL, hook, dates, recherche…).                 |
-| **Snapshot**                              | Change State · Create · Delete · Get · Get Many · Update                                    | Met en pause/reprend/annule ; crée ; supprime (mise en file) ; récupère ; liste (filtres) ; modifie tags, statut ou _retry_. |
-| **Tag**                                   | Add to Snapshot · Create · Delete · Get · Get Many · Remove From Snapshot · Rename · Search | Gère les tags et leur association aux snapshots ; recherche avec filtres (créateur, présence de snapshots, tri, année).      |
-| **URL**                                   | Add                                                                                         | Ajoute des URLs à archiver (`POST /cli/add`) avec options (profondeur, tags, plugins, parser, persona…).                     |
+| Ressource                                 | Opérations                                                                                  | Description                                                                                                                   |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Résultat d'archivage** (Archive Result) | Get · Get Many                                                                              | Récupère un résultat par ID ; liste (filtres : plugin, statut, snapshot, tag, URL, hook, dates, recherche…).                  |
+| **Snapshot**                              | Change State · Create · Delete · Get · Get Many · Update                                    | Met en pause/reprend/annule ; crée ; supprime (mise en file) ; récupère ; liste (filtres) ; modifie tags, statut ou _retry_.  |
+| **Tag**                                   | Add to Snapshot · Create · Delete · Get · Get Many · Remove From Snapshot · Rename · Search | Gère les tags et leur association aux snapshots ; recherche avec filtres (créateur, présence de snapshots, tri, année).       |
+| **URL**                                   | Add · Add Many                                                                              | Ajoute une URL (Add) ou plusieurs (Add Many) à archiver (`POST /cli/add`) avec options (profondeur, tags, plugins, persona…). |
 
 ### Fonctionnalités
 
 - **Pagination** : option _Return All_ pour tout récupérer, ou _Limit_ pour borner le
   nombre de résultats sur les listes.
 - **Filtres** : dates, recherche texte, statut, tag, URL, etc. selon la ressource.
-- **Ajout en masse** : l'opération URL → Add accepte plusieurs URLs séparées par des
+- **Ajout en masse** : l'opération URL → Add Many accepte plusieurs URLs séparées par des
   retours à la ligne ou des virgules.
-- **Lien de l'archive** : URL → Add renvoie un élément par snapshot, avec son lien dans
+- **Lien de l'archive** : URL → Add et Add Many renvoient un élément par snapshot, avec son lien dans
   `archive_url` (`<Base URL>/<archive_path>`). L'archivage tourne en arrière-plan : juste
   après l'ajout, `status` vaut en général `queued` et la page se remplit ensuite. Une URL
   déjà archivée que **Only New** a ignorée renvoie son snapshot le plus récent.
@@ -89,7 +89,8 @@ Les identifiants sont validés via un appel à `GET /api/v1/core/tags?limit=1`.
 
 1. Ajoutez le nœud **ArchiveBox** et sélectionnez vos identifiants.
 2. Ressource **URL** → opération **Add**.
-3. Saisissez les URLs à archiver et, au besoin, des _Tags_ dans les options.
+3. Saisissez l'URL à archiver (plusieurs : opération **Add Many**) et, au besoin, des _Tags_ dans
+   les options. Le lien de l'archive est dans `archive_url`.
 
 ### Ressources
 
@@ -163,15 +164,15 @@ Credentials are validated with a call to `GET /api/v1/core/tags?limit=1`.
 | **Archive Result** | Get · Get Many                                                                              | Get a result by ID; list (filters: plugin, status, snapshot, tag, URL, hook, dates, search…).         |
 | **Snapshot**       | Change State · Create · Delete · Get · Get Many · Update                                    | Pause/resume/cancel; create; delete (queued); get; list (filters); update tags, status or retry time. |
 | **Tag**            | Add to Snapshot · Create · Delete · Get · Get Many · Remove From Snapshot · Rename · Search | Manage tags and their link to snapshots; search with filters (creator, has snapshots, sort, year).    |
-| **URL**            | Add                                                                                         | Add URLs to archive (`POST /cli/add`) with options (depth, tags, plugins, parser, persona…).          |
+| **URL**            | Add · Add Many                                                                              | Add one URL (Add) or several (Add Many) to archive (`POST /cli/add`) with options (depth, tags…).     |
 
 ### Features
 
 - **Pagination**: _Return All_ to fetch everything, or _Limit_ to cap the number of
   results on list operations.
 - **Filters**: dates, text search, status, tag, URL, etc. depending on the resource.
-- **Bulk add**: URL → Add accepts several URLs separated by new lines or commas.
-- **Archive link**: URL → Add returns one item per snapshot, with its link in `archive_url`
+- **Bulk add**: URL → Add Many accepts several URLs separated by new lines or commas.
+- **Archive link**: URL → Add and Add Many return one item per snapshot, with its link in `archive_url`
   (`<Base URL>/<archive_path>`). Archiving runs in the background: right after the add,
   `status` is usually `queued` and the page fills in later. An already archived URL that
   **Only New** skipped returns its latest snapshot.
@@ -189,7 +190,8 @@ Credentials are validated with a call to `GET /api/v1/core/tags?limit=1`.
 
 1. Add the **ArchiveBox** node and select your credentials.
 2. Resource **URL** → operation **Add**.
-3. Enter the URLs to archive and, if needed, _Tags_ in the options.
+3. Enter the URL to archive (several: operation **Add Many**) and, if needed, _Tags_ in the
+   options. The archive link is in `archive_url`.
 
 ### Resources
 

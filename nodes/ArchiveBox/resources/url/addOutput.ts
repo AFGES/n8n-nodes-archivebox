@@ -16,7 +16,7 @@ interface AddResult {
 }
 
 /**
- * `postReceive` of URL > Add: replaces the add command's output with one item per snapshot,
+ * `postReceive` of URL > Add and Add Many: replaces the add command's output with one item per snapshot,
  * each with `archive_url`, the snapshot's page in the ArchiveBox UI.
  *
  * `/api/v1/cli/add` only queues the crawl (archiving runs in the background) and returns

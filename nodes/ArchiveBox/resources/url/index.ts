@@ -3,6 +3,16 @@ import { addOutputSnapshots } from './addOutput';
 
 const showOnlyForUrl = { resource: ['url'] };
 const showForAdd = { ...showOnlyForUrl, operation: ['add'] };
+const showForAddMany = { ...showOnlyForUrl, operation: ['addMany'] };
+const showForAnyAdd = { ...showOnlyForUrl, operation: ['add', 'addMany'] };
+
+// Both operations call POST /cli/add (ArchiveBox takes a list of URLs) and output one item per
+// snapshot with `archive_url`. On failure the full add response is kept: `result` is empty and the
+// reasons are in `success`, `errors` and `stderr`.
+const addRouting = {
+	request: { method: 'POST' as const, url: '/cli/add' },
+	output: { postReceive: [addOutputSnapshots] },
+};
 
 export const urlDescription: INodeProperties[] = [
 	{
@@ -15,25 +25,44 @@ export const urlDescription: INodeProperties[] = [
 			{
 				name: 'Add',
 				value: 'add',
-				action: 'Add urls',
+				action: 'Add a URL',
+				description: 'Archive one URL. Returns its snapshot, with the link in archive_url.',
+				routing: addRouting,
+			},
+			{
+				name: 'Add Many',
+				value: 'addMany',
+				action: 'Add many urls',
 				description:
-					'Add URLs to ArchiveBox for archiving. Returns one item per snapshot, with its link in archive_url.',
-				routing: {
-					request: { method: 'POST', url: '/cli/add' },
-					// One item per snapshot with `archive_url`. On failure the full add response is
-					// kept: `result` is empty and the reasons are in `success`, `errors` and `stderr`.
-					output: { postReceive: [addOutputSnapshots] },
-				},
+					'Archive several URLs. Returns one item per snapshot, with its link in archive_url.',
+				routing: addRouting,
 			},
 		],
 		default: 'add',
+	},
+	{
+		displayName: 'URL',
+		name: 'url',
+		type: 'string',
+		displayOptions: { show: showForAdd },
+		default: '',
+		required: true,
+		placeholder: 'https://example.com',
+		description: 'URL to archive',
+		routing: {
+			send: {
+				type: 'body',
+				property: 'urls',
+				value: '={{ [String($value).trim()] }}',
+			},
+		},
 	},
 	{
 		displayName: 'URLs',
 		name: 'urls',
 		type: 'string',
 		typeOptions: { rows: 4 },
-		displayOptions: { show: showForAdd },
+		displayOptions: { show: showForAddMany },
 		default: '',
 		required: true,
 		placeholder: 'https://example.com',
@@ -51,7 +80,7 @@ export const urlDescription: INodeProperties[] = [
 		name: 'options',
 		type: 'collection',
 		placeholder: 'Add Option',
-		displayOptions: { show: showForAdd },
+		displayOptions: { show: showForAnyAdd },
 		default: {},
 		options: [
 			{
