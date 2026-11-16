@@ -107,7 +107,7 @@ Voir [CHANGELOG.md](CHANGELOG.md).
 
 [MIT](https://opensource.org/licenses/MIT).
 
-Les icônes `nodes/ArchiveBox/archivebox{,.dark}.svg` intègrent le logo du projet
+Les icônes `nodes/ArchiveBox/archivebox{,.dark}.svg` reproduisent en vectoriel le logo du projet
 [ArchiveBox](https://github.com/ArchiveBox/ArchiveBox) (`docs/_static/icon.png`, licence MIT,
 © Nick Sweeting et les contributeurs d'ArchiveBox).
 
@@ -208,6 +208,6 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 [MIT](https://opensource.org/licenses/MIT).
 
-The icons `nodes/ArchiveBox/archivebox{,.dark}.svg` embed the logo of the
+The icons `nodes/ArchiveBox/archivebox{,.dark}.svg` are a vector version of the logo of the
 [ArchiveBox](https://github.com/ArchiveBox/ArchiveBox) project (`docs/_static/icon.png`, MIT
 license, © Nick Sweeting and the ArchiveBox contributors).
