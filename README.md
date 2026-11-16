@@ -71,6 +71,10 @@ Les identifiants sont validés via un appel à `GET /api/v1/core/tags?limit=1`.
 - **Filtres** : dates, recherche texte, statut, tag, URL, etc. selon la ressource.
 - **Ajout en masse** : l'opération URL → Add accepte plusieurs URLs séparées par des
   retours à la ligne ou des virgules.
+- **Lien de l'archive** : URL → Add renvoie un élément par snapshot, avec son lien dans
+  `archive_url` (`<Base URL>/<archive_path>`). L'archivage tourne en arrière-plan : juste
+  après l'ajout, `status` vaut en général `queued` et la page se remplit ensuite. Une URL
+  déjà archivée que **Only New** a ignorée renvoie son snapshot le plus récent.
 - Le nœud est utilisable comme **outil** (`usableAsTool`) dans les workflows IA d'n8n.
 
 ### Compatibilité
@@ -163,6 +167,10 @@ Credentials are validated with a call to `GET /api/v1/core/tags?limit=1`.
   results on list operations.
 - **Filters**: dates, text search, status, tag, URL, etc. depending on the resource.
 - **Bulk add**: URL → Add accepts several URLs separated by new lines or commas.
+- **Archive link**: URL → Add returns one item per snapshot, with its link in `archive_url`
+  (`<Base URL>/<archive_path>`). Archiving runs in the background: right after the add,
+  `status` is usually `queued` and the page fills in later. An already archived URL that
+  **Only New** skipped returns its latest snapshot.
 - The node is **usable as a tool** (`usableAsTool`) in n8n AI workflows.
 
 ### Compatibility

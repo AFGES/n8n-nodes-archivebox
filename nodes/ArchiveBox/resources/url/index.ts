@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { addOutputSnapshots } from './addOutput';
 
 const showOnlyForUrl = { resource: ['url'] };
 const showForAdd = { ...showOnlyForUrl, operation: ['add'] };
@@ -15,11 +16,13 @@ export const urlDescription: INodeProperties[] = [
 				name: 'Add',
 				value: 'add',
 				action: 'Add urls',
-				description: 'Add URLs to ArchiveBox for archiving',
+				description:
+					'Add URLs to ArchiveBox for archiving. Returns one item per snapshot, with its link in archive_url.',
 				routing: {
-					// Full response is kept: on failure `result` is empty and the reasons are in
-					// `success`, `errors` and `stderr`.
 					request: { method: 'POST', url: '/cli/add' },
+					// One item per snapshot with `archive_url`. On failure the full add response is
+					// kept: `result` is empty and the reasons are in `success`, `errors` and `stderr`.
+					output: { postReceive: [addOutputSnapshots] },
 				},
 			},
 		],
